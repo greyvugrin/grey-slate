@@ -1,0 +1,23 @@
+{
+  "name": "grey-slate",
+  "description": "Canvas drawing webapp that allows simultaneous users at once",
+  "version": "0.0.1",
+  "private": true,
+  "license": "",
+  "author": "Grey Vugrin",
+  "engines": {
+    "node": "~4.2"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "express-ws": "^1.0.0-rc.2",
+    "http": "0.0.0",
+    "jade": "^1.11.0",
+    "node-static": "^0.7.7",
+    "request": "^2.69.0",
+    "socket.io": "^1.4.6"
+  }
+}
