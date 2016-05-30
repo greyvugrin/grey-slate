@@ -6,9 +6,6 @@ $(function(){
     return false;
   }
 
-  // The URL of your web server (the port is set in app.js)
-  var url = 'http://localhost:3000';
-
   var doc = $(document),
     win = $(window),
     canvas = $('#paper'),
@@ -30,9 +27,18 @@ $(function(){
 
   var points = [];
 
-  var socket = io.connect(url);
+  var host = location.origin.replace(/^http/, 'ws')
+  var ws = new WebSocket(host);
 
-  socket.on('moving', function (data) {
+  // Listen for data, and draw lines
+  ws.onmessage = function (event) {
+
+    console.log(event);
+    var data = JSON.parse(event.data);
+
+    var li = document.createElement('li');
+    li.innerHTML = event.data;
+    document.querySelector('body').appendChild(li);
 
     if(! (data.id in clients)){
       // a new user has come online. create a cursor for them
@@ -59,7 +65,7 @@ $(function(){
     // Saving the current client state
     clients[data.id] = data;
     clients[data.id].updated = $.now();
-  });
+  };
 
   var prev = {};
 
@@ -82,13 +88,13 @@ $(function(){
 
   doc.on('mousemove',function(e){
     if($.now() - lastEmit > 30){
-      socket.emit('mousemove',{
+      ws.send(JSON.stringify({
         'x': e.pageX,
         'y': e.pageY,
         'drawing': drawing,
         'id': id,
         'points': points
-      });
+      }));
       lastEmit = $.now();
     }
 
@@ -148,8 +154,6 @@ $(function(){
 
     // Following technique used courtesy of Juriy "kangax" Zaytsev, full bog post here: http://perfectionkills.com/exploring-canvas-drawing-techniques/
     var lastPoint = points[points.length-1];
-
-    console.log(points);
 
     for (var i = 0, len = points.length; i < len; i++) {
       dx = points[i].x - lastPoint.x;
