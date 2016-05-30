@@ -33,13 +33,6 @@ $(function(){
   // Listen for data, and draw lines
   ws.onmessage = function (event) {
 
-    console.log(event);
-    var data = JSON.parse(event.data);
-
-    var li = document.createElement('li');
-    li.innerHTML = event.data;
-    document.querySelector('body').appendChild(li);
-
     if(! (data.id in clients)){
       // a new user has come online. create a cursor for them
       cursors[data.id] = $('<div class="cursor">').appendTo('#cursors');
