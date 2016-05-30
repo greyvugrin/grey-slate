@@ -13,13 +13,17 @@ $(function(){
     win = $(window),
     canvas = $('#paper'),
     ctx = canvas[0].getContext('2d'),
-    instructions = $('#instructions');
+    instructions = $('.instructions');
 
   // Generate a unique ID
   var id = Math.round($.now()*Math.random());
 
   // A flag for drawing activity
   var drawing = false;
+
+  // Stroke Colors
+  var color1 = '123,199,77', // '57,62,70',
+      color2 = '238,238,238';
 
   var clients = {};
   var cursors = {};
@@ -49,7 +53,7 @@ $(function(){
 
       points = data.points;
 
-      drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y, 'rgba(155, 255, 75, 0.3)');
+      drawLine(clients[data.id].x, clients[data.id].y, data.x, data.y, 'rgba('+ color1 +', 0.3)');
     }
 
     // Saving the current client state
@@ -97,7 +101,7 @@ $(function(){
 
       // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-      drawLine(prev.x, prev.y, e.pageX, e.pageY, 'rgba(255,45,0, 0.3)');
+      drawLine(prev.x, prev.y, e.pageX, e.pageY, 'rgba('+ color2 +', 0.3)');
 
       prev.x = e.pageX;
       prev.y = e.pageY;
@@ -130,7 +134,7 @@ $(function(){
 
   function drawLine(fromx, fromy, tox, toy, color){
 
-    // // Original line 
+    // // Original line
     // Round those lines
     // ctx.lineCap = 'round';
     // ctx.lineWidth = 10;
@@ -160,6 +164,10 @@ $(function(){
         ctx.stroke();
       }
     }
+
+    ctx.moveTo(fromx, fromy);
+    ctx.lineTo(tox, toy);
+    ctx.stroke();
   }
 
 });
