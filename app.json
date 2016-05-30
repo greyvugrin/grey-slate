@@ -1,0 +1,8 @@
+{
+  "name": "Grey Slate",
+  "description": "A NodeJS multiplayer drawing experiment, using the Neighbor Points technique.",
+  "repository": "https://github.com/greyvugrin/grey-slate.git",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "canvas", "sockets"],
+  "image": "heroku/nodejs"
+}

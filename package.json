@@ -11,6 +11,10 @@
   "scripts": {
     "start": "node app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/greyvugrin/grey-slate.git"
+  },
   "dependencies": {
     "express": "^4.13.4",
     "express-ws": "^1.0.0-rc.2",
