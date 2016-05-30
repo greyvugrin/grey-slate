@@ -2,7 +2,6 @@
 
 var WebSocketServer = require("ws").Server;
 var app = require('http').createServer(handler),
-	io = require('socket.io').listen(app),
 	http = require("http")
 	static = require('node-static'); // for serving files
 
